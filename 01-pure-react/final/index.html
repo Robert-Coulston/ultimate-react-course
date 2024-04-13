@@ -20,16 +20,24 @@
 
     <script>
       function App() {
+        console.log("starting app");
         // const time = new Date().toLocaleTimeString();
         const [time, setTime] = React.useState(new Date().toLocaleTimeString());
 
-        React.useEffect(function () {
-          setInterval(function () {
+        React.useEffect(() => {
+          console.log("use effect started");
+          const interval = setInterval(() => {
+            console.log("interval updating");
             setTime(new Date().toLocaleTimeString());
           }, 1000);
+
+          return () => {
+            console.log("interval cleared");
+            clearInterval(interval);
+          };
         }, []);
 
-        return React.createElement("header", null, `Hello React! It's ${time}`);
+        return React.createElement("header", null, `Hello React! It's time here ${time}`);
       }
 
       const root = ReactDOM.createRoot(document.getElementById("root"));
