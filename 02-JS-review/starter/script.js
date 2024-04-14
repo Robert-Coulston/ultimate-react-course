@@ -142,3 +142,82 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+getYear = (str) => {
+  var [year, month, day] = str.split("-");
+  return year;
+}
+
+// const book = getBook(1);
+// const {title, author, pages, publicationDate, genres, hasMovieAdaptation} = book;
+// const updatedBook = { ...book, title: "blah", moviePublicationDate: '2001-12-19', year: getYear(publicationDate)}; 
+
+// console.log(updatedBook);
+
+// const summary = `${title} is a book written by ${author}`;
+// const pagesRange = pages >= 1000 ? 'over 1000' : "under 1000";
+
+// pagesRange
+
+// var x = hasMovieAdaptation && "value is true";
+// var y = !hasMovieAdaptation || "value is this";
+// var z = !hasMovieAdaptation ?? "value is this";
+// console.log(x,y,z);
+
+// const a = [1,2,3,4,5].map(x => x * 2);
+// a
+
+const books = getBooks();
+// const titles = books.map(b => b.title);
+
+// const essentials = books.map(x => ({title: x.title, date: x.publicationDate}));
+// essentials
+
+// const longBooks = books.filter(x => x.pages > 834).map(x => x.pages);
+// longBooks
+
+const advBooks = books.filter(x => x.genres.includes("adventure")).map(x => x.title);
+// advBooks
+
+const total = books.reduce((a,c) => {return a + c.pages},0);
+// total
+
+const ss = [4,5,3,1,7,5,6];
+//ss
+const ss2 = ss.slice();
+//ss2
+const s = ss2.sort((a,b) => a-b);
+//console.log(ss,ss2,s);
+
+const sorted = books.sort((a,b) => {
+  return (a.author).localeCompare(b.author);
+});
+//sorted
+
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the chamber of secrets",
+  author: "J. K. Rowling"
+}
+
+const booksAfterAdd = [...books, newBook];
+//booksAfterAdd
+
+const booksAfterDelete = booksAfterAdd.filter(x => x.id !== 3);
+//booksAfterDelete
+
+// const result = fetch('https://jsonplaceholder.typicode.com/todos/1');
+// result.then((x) => {return x.json()}).then(data => console.log(data));
+
+async function getTodoList() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const data = await res.json();
+  console.log(data);
+  return data;
+}
+
+
+await getTodoList();
+
+console.log("finished");
+
